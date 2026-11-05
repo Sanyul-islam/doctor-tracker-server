@@ -1,6 +1,7 @@
-const express = require("express");
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import authRoutes from "./routes/authRoutes.js";
 
 const app = express();
 
@@ -22,4 +23,7 @@ app.get("/api/health", (req, res) => {
   });
 });
 
-module.exports = app;
+// Routes
+app.use("/api/auth", authRoutes);
+
+export default app;
