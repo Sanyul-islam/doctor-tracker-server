@@ -12,10 +12,11 @@ import authMiddleware from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-// Protected routes
+// Protected routes for doctor management
 router.post("/", authMiddleware, createDoctor);
 router.get("/", authMiddleware, getAllDoctors);
 router.get("/:id", authMiddleware, getSingleDoctor);
 router.patch("/:id", authMiddleware, updateDoctor);
 router.delete("/:id", authMiddleware, deleteDoctor);
+
 export default router;
