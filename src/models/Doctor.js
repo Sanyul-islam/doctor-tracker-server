@@ -20,6 +20,10 @@ const doctorSchema = new mongoose.Schema(
       trim: true,
       index: true,
     },
+    experience: {
+      type: Number,
+      default: 0,
+    },
     phone: {
       type: String,
       required: [true, "Phone number is required"],

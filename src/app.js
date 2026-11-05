@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/authRoutes.js";
-
+import doctorRoutes from "./routes/doctorRoutes.js";
 const app = express();
 
 // Middleware
@@ -25,5 +25,6 @@ app.get("/api/health", (req, res) => {
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/doctors", doctorRoutes);
 
 export default app;
