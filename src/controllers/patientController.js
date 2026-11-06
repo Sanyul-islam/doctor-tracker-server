@@ -121,12 +121,20 @@ export const getAllPatients = async (req, res) => {
     }
 
     // Exact filters
-    if (gender) filter.gender = gender;
-    if (status) filter.status = status;
-    if (conditionCategory) filter.conditionCategory = conditionCategory;
+    if (gender && gender !== "ALL") {
+      filter.gender = gender;
+    }
+
+    if (status && status !== "ALL") {
+      filter.status = status;
+    }
+
+    if (conditionCategory && conditionCategory !== "ALL") {
+      filter.conditionCategory = conditionCategory;
+    }
 
     // Filter by Doctor
-    if (doctorId) {
+    if (doctorId && doctorId !== "ALL") {
       if (!mongoose.isValidObjectId(doctorId)) {
         return res.status(400).json({
           success: false,
@@ -136,7 +144,7 @@ export const getAllPatients = async (req, res) => {
 
       filter.doctorId = doctorId;
     }
-
+    
     // Admission date range filter
     if (startDate || endDate) {
       filter.admissionDate = {};

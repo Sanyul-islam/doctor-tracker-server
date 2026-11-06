@@ -96,12 +96,12 @@ export const getAllDoctors = async (req, res) => {
     }
 
     // Filter by specialization
-    if (specialization) {
+    if (specialization && specialization !== "ALL") {
       filter.specialization = specialization;
     }
 
     // Filter by hospital
-    if (hospital) {
+    if (hospital && hospital !== "ALL") {
       filter.hospital = hospital;
     }
 

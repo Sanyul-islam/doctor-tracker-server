@@ -1,21 +1,12 @@
-import "dotenv/config";
-
 import app from "./src/app.js";
 import connectDB from "./src/config/db.js";
 
-const PORT = process.env.PORT || 5000;
+// শুধু local-এ listen করবে
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 5000;
+  connectDB().then(() => {
+    app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+  });
+}
 
-const startServer = async () => {
-  try {
-    await connectDB();
-
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
-  } catch (error) {
-    console.error("Server startup failed:", error.message);
-    process.exit(1);
-  }
-};
-
-startServer();
+export default app;

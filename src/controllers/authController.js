@@ -44,9 +44,9 @@ export const loginAdmin = async (req, res) => {
     // Set cookie
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      maxAge: 24 * 60 * 60 * 1000,
+      secure: true,
+      sameSite: "none",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     return res.status(200).json({
@@ -65,4 +65,30 @@ export const loginAdmin = async (req, res) => {
       error: error.message,
     });
   }
+};
+export const getMe = async (req, res) => {
+  try {
+    return res.status(200).json({
+      success: true,
+      admin: req.admin,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Failed to get admin profile",
+    });
+  }
+};
+export const logoutAdmin = (req, res) => {
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
+
+  res.status(200).json({
+    success: true,
+    message: "Logged out successfully",
+  });
 };
